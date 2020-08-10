@@ -34,7 +34,7 @@ func main() {
 	}
 
 	for i := range voxes {
-		writeLovox(voxes[i], fmt.Sprintf("%s/vox_%d", outDir, i))
+		writeVox(voxes[i], fmt.Sprintf("%s/vox_%d", outDir, i))
 	}
 }
 

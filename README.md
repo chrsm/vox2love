@@ -1,9 +1,7 @@
 ## vox2love
 
-`vox2love` converts a MagicaVoxel `.vox` file into files loadable by Lovox.
-
-Rather than loading an entire `.vox` at runtime, they can be preprocessed into
-the format that Lovox expects.
+`vox2love` converts a MagicaVoxel `.vox` file into images that can be used
+in LOVE.
 
 Note that this currently only supports v150 of the `.vox` format, as specified
 in `docs/file-format.txt`, which was pulled from [here][1].

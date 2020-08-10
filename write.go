@@ -3,13 +3,12 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 	"unsafe"
 
 	"github.com/fogleman/gg"
 )
 
-func writeLovox(v *vox, out string) {
+func writeVox(v *vox, out string) {
 	sz := v.sizes[0]
 
 	w := int(sz.z * sz.x)
@@ -51,28 +50,5 @@ func writeLovox(v *vox, out string) {
 		}
 
 		dc.SavePNG(fmt.Sprintf("%s_%d.png", out, i))
-
-		// save flags.lua
-		fp, err := os.OpenFile(fmt.Sprintf("%s_%d.lua", out, i), os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0o600)
-		if err != nil {
-			panic(err)
-		}
-
-		fp.WriteString(
-			fmt.Sprintf(
-				flagsTpl,
-				w/int(sz.x),
-				sz.x,
-				sz.y,
-			),
-		)
-
-		fp.Close()
 	}
 }
-
-const flagsTpl = `return {
-    frames = %d,
-    width  = %d,
-    height = %d,
-}`
