@@ -9,8 +9,9 @@ import (
 )
 
 var (
-	voxDir string // path/to/src
-	outDir string // path/to/dest
+	voxDir  string // path/to/src
+	outDir  string // path/to/dest
+	extrude bool   // whether or not to pad images
 )
 
 func main() {
@@ -18,6 +19,7 @@ func main() {
 
 	flag.StringVar(&voxDir, "p", "", "path to directory containin vox files")
 	flag.StringVar(&outDir, "o", "", "output directory")
+	flag.BoolVar(&extrude, "e", false, "extrude image frames by 1px each side")
 	flag.Parse()
 
 	if len(outDir) == 0 {
@@ -28,13 +30,17 @@ func main() {
 		log.Fatalf("-p not specified")
 	}
 
+	if extrude {
+		log.Printf("extruding all images by 1px")
+	}
+
 	voxes, err := enumer(voxDir)
 	if err != nil {
 		log.Fatalf("fatal error: %s", err)
 	}
 
 	for i := range voxes {
-		writeVox(voxes[i], fmt.Sprintf("%s/vox_%d", outDir, i))
+		writeVox(voxes[i], fmt.Sprintf("%s/vox_%d", outDir, i), extrude)
 	}
 }
 
