@@ -77,7 +77,7 @@ func writeVox(v *vox, out string, extrude bool) {
 			// clone across interval'd X down to Y
 			for x := 0; x < int(sz.x)*int(sz.z); x += int(sz.x) {
 				// x is offsetted earlier
-				truex := x + ((x / int(sz.z)) % int(sz.z))
+				truex := x + ((x / int(sz.x)) % int(sz.x))
 
 				for y := 0; y < int(sz.y); y++ {
 					cat := img.At(truex+7, y)
